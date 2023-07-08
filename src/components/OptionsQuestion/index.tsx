@@ -7,10 +7,10 @@ function OptionsQuestion({ questionText, selections }: Props) {
   return (
     <div>
       <h1>{questionText}</h1>
-      {selections.map((selection) => (
+      {selections.map((value) => (
         <>
-          <input id={selection} type="radio" value={selection} />
-          <label htmlFor={selection}>{selection}</label>
+          <input id={value} type="radio" value={value} />
+          <label htmlFor={value}>{value}</label>
         </>
       ))}
     </div>
