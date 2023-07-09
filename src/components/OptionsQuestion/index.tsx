@@ -1,17 +1,28 @@
-interface Props {
+import { Fragment } from 'react';
+
+interface Props
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  error?: React.ReactNode | undefined;
   questionText: string;
   selections: string[];
 }
 
-function OptionsQuestion({ questionText, selections }: Props) {
+function OptionsQuestion({ error, questionText, selections, ...rest }: Props) {
+  console.log(rest);
   return (
     <div>
-      <h1>{questionText}</h1>
+      <h1>
+        {questionText}
+        {error}
+      </h1>
       {selections.map((value) => (
-        <>
-          <input id={value} type="radio" value={value} />
+        <Fragment key={value}>
+          <input id={value} type="radio" value={value} {...rest} />
           <label htmlFor={value}>{value}</label>
-        </>
+        </Fragment>
       ))}
     </div>
   );

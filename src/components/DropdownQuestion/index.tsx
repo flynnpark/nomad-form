@@ -1,14 +1,9 @@
-export interface OptionProps {
-  text: string;
-  value: string;
-}
-
 interface Props
   extends React.DetailedHTMLProps<
     React.SelectHTMLAttributes<HTMLSelectElement>,
     HTMLSelectElement
   > {
-  options: OptionProps[];
+  options: string[];
   questionText: string;
 }
 
@@ -17,9 +12,9 @@ function DropdownQuestion({ options, questionText, ...rest }: Props) {
     <div>
       <h1>{questionText}</h1>
       <select {...rest}>
-        {options.map(({ text, value }) => (
+        {options.map((value) => (
           <option key={value} value={value}>
-            {text}
+            {value}
           </option>
         ))}
       </select>

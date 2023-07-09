@@ -3,14 +3,16 @@ interface Props
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
+  error?: React.ReactNode | undefined;
   questionText: string;
 }
 
-function TextInputQuestion({ questionText, ...rest }: Props) {
+function TextInputQuestion({ error, questionText, ...rest }: Props) {
   return (
     <div>
       <h1>{questionText}</h1>
       <input {...rest} />
+      {error}
     </div>
   );
 }
