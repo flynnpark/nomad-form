@@ -6,15 +6,7 @@ import {
   TextAreaQuestion,
   TextInputQuestion,
 } from '~/components';
-
-interface FormProps {
-  question1: string;
-  question2: string;
-  question3: string;
-  question4: string;
-  question5: string;
-  question6: string;
-}
+import { FormProps } from '~/types';
 
 export default function Home() {
   const {
@@ -22,8 +14,6 @@ export default function Home() {
     handleSubmit,
     register,
   } = useForm<FormProps>();
-
-  console.log(errors);
 
   return (
     <div>
@@ -34,9 +24,13 @@ export default function Home() {
               <span>{errors.question1.message.toString()}</span>
             )
           }
+          formOptions={{
+            required: '*required',
+          }}
+          name="question1"
           questionText="What department do you want to work for?"
+          register={register}
           selections={['Sales', 'Marketing', 'Accounting', 'Customer Service']}
-          {...register('question1', { required: '*required' })}
         />
         <OptionsQuestion
           error={
@@ -44,37 +38,63 @@ export default function Home() {
               <span>{errors.question2.message.toString()}</span>
             )
           }
+          formOptions={{
+            required: '*required',
+          }}
           selections={[
             'I want money!',
             'I love this company',
             'I want to learn',
             "I don't know why",
           ]}
+          name="question2"
           questionText="Why do you want to join this company?"
-          {...register('question2', { required: '*required' })}
+          register={register}
         />
         <DropdownQuestion
+          name="question3"
           options={['$50K', '$100K', '$150K', '$200K']}
           questionText="Salary"
-          {...register('question3')}
+          register={register}
         />
         <TextInputQuestion
+          error={
+            errors.question4?.message && (
+              <span>{errors.question4.message.toString()}</span>
+            )
+          }
+          formOptions={{
+            required: 'Please write down your introduction.',
+          }}
+          name="question4"
           questionText="Introduce yourself"
-          {...register('question4', {
-            required: 'Please tell us what your dreams are.',
-          })}
+          register={register}
         />
         <TextAreaQuestion
+          error={
+            errors.question5?.message && (
+              <span>{errors.question5.message.toString()}</span>
+            )
+          }
+          formOptions={{
+            required: 'Please tell us what your dreams are.',
+          }}
+          name="question5"
           questionText="Tell us what your dreams are"
-          {...register('question5', {
-            required: 'Please write down your email.',
-          })}
+          register={register}
         />
         <TextInputQuestion
-          questionText="Email"
-          {...register('question6', {
+          error={
+            errors.question5?.message && (
+              <span>{errors.question5.message.toString()}</span>
+            )
+          }
+          formOptions={{
             required: 'Please write down your email.',
-          })}
+          }}
+          name="question6"
+          questionText="Email"
+          register={register}
         />
         <button type="submit">Give me this job</button>
       </form>
